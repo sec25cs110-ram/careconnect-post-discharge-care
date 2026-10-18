@@ -1,0 +1,6 @@
+{
+  "name": "Zero-Friction Post-Discharge Care — Quantex’26",
+  "description": "Quantex’26 Competition Presentation: AI-Powered Vernacular Medication Reconciliation and Herb–Drug Safety Engine by Team NEURALNOVA, Sri Sairam Engineering College.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
