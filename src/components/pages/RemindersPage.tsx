@@ -19,7 +19,7 @@ import {
   Radio
 } from 'lucide-react';
 import { useCareConnect } from '../../context/CareConnectContext';
-import { unlockAudio, playAlertChime, speakVernacularText } from '../../utils/audioService';
+import { unlockAudio, playAlertChime, speakVernacularText, getDetectedIndianVoices, VoiceOption } from '../../utils/audioService';
 
 export const RemindersPage: React.FC = () => {
   const { 
@@ -47,6 +47,19 @@ export const RemindersPage: React.FC = () => {
   const [isEscalated, setIsEscalated] = useState<boolean>(false);
   const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
   const [speechStatusText, setSpeechStatusText] = useState<string>('');
+  const [voiceOptions, setVoiceOptions] = useState<VoiceOption[]>([]);
+  const [selectedVoiceURI, setSelectedVoiceURI] = useState<string>('');
+
+  // Pre-load available system voices
+  useEffect(() => {
+    getDetectedIndianVoices().then((voices) => {
+      setVoiceOptions(voices);
+      const firstIndian = voices.find(v => v.isIndian);
+      if (firstIndian) {
+        setSelectedVoiceURI(firstIndian.voice.voiceURI);
+      }
+    });
+  }, []);
 
   // Update timer on demo mode change
   useEffect(() => {
@@ -70,13 +83,18 @@ export const RemindersPage: React.FC = () => {
     return () => clearInterval(timer);
   }, [isRunning, countdown, isEscalated, voiceAlertsEnabled, language, activeReminder]);
 
-  const triggerSpeech = async (targetLang: 'en' | 'ta' | 'tanglish') => {
+  const triggerSpeech = async (targetLang: 'en' | 'ta' | 'tanglish', specificVoiceURI?: string) => {
     unlockAudio();
-    showToast(`Playing audible chime and ${targetLang.toUpperCase()} voice alert...`);
-    await speakVernacularText(targetLang, undefined, (speaking, msg) => {
-      setIsSpeaking(speaking);
-      if (msg) setSpeechStatusText(msg);
-    });
+    showToast(`Playing Indian chime and ${targetLang.toUpperCase()} voice alert...`);
+    await speakVernacularText(
+      targetLang, 
+      undefined, 
+      (speaking, msg) => {
+        setIsSpeaking(speaking);
+        if (msg) setSpeechStatusText(msg);
+      }, 
+      specificVoiceURI || selectedVoiceURI
+    );
   };
 
   const handleTakeDose = () => {
@@ -241,8 +259,45 @@ export const RemindersPage: React.FC = () => {
             </div>
           </div>
 
+          {/* Indian Voice Selector & Cadence Tuning */}
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                <span>🇮🇳</span>
+                <span>Indian Voice Engine & Accent Tuning</span>
+              </span>
+              <span className="text-[10px] text-teal-700 font-semibold bg-teal-50 px-2 py-0.5 rounded-full border border-teal-200">
+                Paced at 0.88x · Warm 1.04 Pitch
+              </span>
+            </div>
+
+            <div>
+              <label className="text-[11px] font-semibold text-slate-600 block mb-1">
+                Detected System Voice Accent:
+              </label>
+              <select
+                value={selectedVoiceURI}
+                onChange={(e) => {
+                  setSelectedVoiceURI(e.target.value);
+                  triggerSpeech(language, e.target.value);
+                }}
+                className="w-full p-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              >
+                {voiceOptions.length > 0 ? (
+                  voiceOptions.map((opt, i) => (
+                    <option key={i} value={opt.voice.voiceURI}>
+                      {opt.label}
+                    </option>
+                  ))
+                ) : (
+                  <option value="">Auto-Detecting Indian Accent...</option>
+                )}
+              </select>
+            </div>
+          </div>
+
           {/* Voice Preview Controls (3 Dialects) */}
-          <div className="space-y-3 pt-2">
+          <div className="space-y-3 pt-1">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-700 block">
               Test Spoken Dialect Previews:
             </span>
@@ -252,20 +307,20 @@ export const RemindersPage: React.FC = () => {
                 { 
                   id: 'tanglish', 
                   label: 'Tanglish Phrasing', 
-                  quote: '“Time aaiduchu, tablet podunga!”',
-                  desc: 'Natural Tamil in English letters' 
+                  quote: '“Vanakkam! Time aayiduchu, tablet podunga!”',
+                  desc: 'Natural conversational Tamil in English letters' 
                 },
                 { 
                   id: 'ta', 
                   label: 'Tamil Dialect', 
-                  quote: '“மருந்து எடுத்துக்கொள்ளும் நேரம் வந்துவிட்டது.”',
+                  quote: '“வணக்கம்! மருந்து நேரம் வந்துவிட்டது.”',
                   desc: 'Pure Tamil speech synthesis' 
                 },
                 { 
                   id: 'en', 
-                  label: 'English Dialect', 
-                  quote: '“Time for your scheduled medicine.”',
-                  desc: 'Standard clinical notification' 
+                  label: 'Indian English', 
+                  quote: '“Good morning Priya. Time for your medicine.”',
+                  desc: 'Respectful Indian clinical tone' 
                 }
               ].map((item) => (
                 <div 
@@ -278,7 +333,7 @@ export const RemindersPage: React.FC = () => {
                 >
                   <div>
                     <span className="text-xs font-bold text-slate-900 block">{item.label}</span>
-                    <p className="text-[11px] text-indigo-700 font-semibold my-1">{item.quote}</p>
+                    <p className="text-[11px] text-indigo-700 font-semibold my-1 leading-snug">{item.quote}</p>
                     <p className="text-[10px] text-slate-500">{item.desc}</p>
                   </div>
 
@@ -294,10 +349,11 @@ export const RemindersPage: React.FC = () => {
 
                     <button
                       onClick={() => triggerSpeech(item.id as any)}
-                      className="p-1.5 rounded-lg bg-teal-100 text-teal-800 hover:bg-teal-200 transition-colors"
+                      className="p-1.5 rounded-lg bg-teal-100 text-teal-800 hover:bg-teal-200 transition-colors flex items-center gap-1 text-[10px] font-bold"
                       title="Play Audio Sample"
                     >
                       <Volume2 className="w-3.5 h-3.5" />
+                      <span>Hear Voice</span>
                     </button>
                   </div>
                 </div>

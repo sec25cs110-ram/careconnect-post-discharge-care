@@ -73,9 +73,9 @@ export const SettingsPage: React.FC = () => {
 
           <div className="space-y-2.5">
             {[
-              { id: 'tanglish', title: 'Tanglish (Tamil in English Script)', sample: '“Time aaiduchu, tablet podunga!”' },
-              { id: 'ta', title: 'Tamil (தமிழ் வடிவம்)', sample: '“மருந்து எடுத்துக்கொள்ளும் நேரம் வந்துவிட்டது.”' },
-              { id: 'en', title: 'English (Clinical Default)', sample: '“It is time for your scheduled medicine.”' }
+              { id: 'tanglish', title: 'Tanglish (Tamil in English Script) 🇮🇳', sample: '“Vanakkam! Time aayiduchu, tablet podunga!”' },
+              { id: 'ta', title: 'Tamil (தமிழ் வடிவம்) 🇮🇳', sample: '“வணக்கம்! மருந்து நேரம் வந்துவிட்டது.”' },
+              { id: 'en', title: 'Indian English 🇮🇳', sample: '“Good morning. Time for your scheduled medicine.”' }
             ].map((opt) => (
               <label 
                 key={opt.id}

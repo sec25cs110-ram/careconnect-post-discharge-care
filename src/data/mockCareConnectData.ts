@@ -129,9 +129,9 @@ export const INITIAL_REMINDERS: MedicationReminder[] = [
     photoUrl: '/src/assets/images/ocr_nlp_reconciliation_1792312876132.jpg',
     foodInstructions: '30 mins before breakfast',
     vernacularPrompt: {
-      en: 'Please take Pantoprazole 40mg before breakfast.',
-      ta: 'காலை உணவுக்கு 30 நிமிடம் முன் பான்டோப்ராசோல் மாத்திரை எடுக்கவும்.',
-      tanglish: 'Kaalai tiffin saapdradhukku 30 mins munnadi Pantoprazole podunga.'
+      en: 'Good morning. Please take Pantoprazole 40mg before breakfast.',
+      ta: 'வணக்கம்! காலை உணவுக்கு 30 நிமிடம் முன் பான்டோப்ராசோல் மாத்திரை எடுக்கவும்.',
+      tanglish: 'Vanakkam! Kaalai tiffin saapdradhukku 30 mins munnadi Pantoprazole podunga.'
     }
   },
   {
@@ -146,9 +146,9 @@ export const INITIAL_REMINDERS: MedicationReminder[] = [
     photoUrl: '/src/assets/images/mobile_vernacular_reminder_1792312875794.jpg',
     foodInstructions: 'Immediately after food',
     vernacularPrompt: {
-      en: 'It is time for your Metformin 500mg dose after breakfast.',
-      ta: 'காலை உணவுக்குப் பின் மெட்ஃபார்மின் 500mg மாத்திரை எடுக்கவும்.',
-      tanglish: 'Time aaiduchu, breakfast mudinjathum Metformin tablet podunga!'
+      en: 'Good morning Priya. Time for your Metformin 500mg dose after breakfast.',
+      ta: 'வணக்கம்! காலை உணவுக்குப் பின் மெட்ஃபார்மின் 500mg மாத்திரை எடுக்கவும்.',
+      tanglish: 'Vanakkam! Time aayiduchu, breakfast mudinjathum Metformin tablet podunga!'
     }
   },
   {
@@ -163,9 +163,9 @@ export const INITIAL_REMINDERS: MedicationReminder[] = [
     photoUrl: '/src/assets/images/mobile_vernacular_reminder_1792312875794.jpg',
     foodInstructions: 'After breakfast with water',
     vernacularPrompt: {
-      en: 'Please take your morning Lisinopril 10mg blood pressure tablet.',
-      ta: 'காலை ரத்த அழுத்த மாத்திரை லிசினோப்ரில் 10mg எடுக்கவும்.',
-      tanglish: 'Kaalai blood pressure tablet Lisinopril 10mg podunga.'
+      en: 'Good morning. Please take your Lisinopril 10mg blood pressure tablet.',
+      ta: 'வணக்கம்! காலை ரத்த அழுத்த மாத்திரை லிசினோப்ரில் 10mg எடுக்கவும்.',
+      tanglish: 'Vanakkam! Kaalai blood pressure tablet Lisinopril 10mg podunga.'
     }
   },
   {
@@ -180,9 +180,9 @@ export const INITIAL_REMINDERS: MedicationReminder[] = [
     photoUrl: '/src/assets/images/herb_drug_safety_matrix_1792312875384.jpg',
     foodInstructions: 'After heavy lunch',
     vernacularPrompt: {
-      en: 'Time for Ecosprin 75mg after lunch. Do not take on empty stomach.',
+      en: 'Afternoon reminder: Time for Ecosprin 75mg after lunch. Take with water.',
       ta: 'மதிய உணவுக்குப் பின் எகோஸ்ப்ரின் 75mg மாத்திரை எடுக்கவும்.',
-      tanglish: 'Lunch mudinjathum Ecosprin 75mg tablet podunga.'
+      tanglish: 'Vanakkam! Lunch mudinjathum Ecosprin 75mg tablet podunga.'
     }
   },
   {
@@ -198,8 +198,8 @@ export const INITIAL_REMINDERS: MedicationReminder[] = [
     foodInstructions: 'At bedtime with water',
     vernacularPrompt: {
       en: 'Bedtime dose: Please take Atorvastatin 40mg before sleep.',
-      ta: 'தூங்குவதற்கு முன் அடோர்வாஸ்டாடின் 40mg மாத்திரை எடுக்கவும்.',
-      tanglish: 'Night thoongum munnadi Atorvastatin 40mg tablet podunga.'
+      ta: 'வணக்கம்! தூங்குவதற்கு முன் அடோர்வாஸ்டாடின் 40mg மாத்திரை எடுக்கவும்.',
+      tanglish: 'Vanakkam! Night thoongum munnadi Atorvastatin 40mg tablet podunga.'
     }
   }
 ];

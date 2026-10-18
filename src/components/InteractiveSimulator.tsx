@@ -175,9 +175,9 @@ export const InteractiveSimulator: React.FC<InteractiveSimulatorProps> = ({ isOp
                   <label className="text-xs font-semibold text-slate-300 block mb-2">Select Vernacular Language:</label>
                   <div className="grid grid-cols-3 gap-2">
                     {[
-                      { id: 'tanglish', label: 'Tanglish', sample: 'Time aaiduchu, tablet podunga!' },
-                      { id: 'tamil', label: 'Tamil', sample: 'மருந்து நேரம் வந்துவிட்டது' },
-                      { id: 'english', label: 'English', sample: 'Medication time due' }
+                      { id: 'tanglish', label: 'Tanglish 🇮🇳', sample: 'Vanakkam! Time aayiduchu, tablet podunga!' },
+                      { id: 'tamil', label: 'Tamil 🇮🇳', sample: 'வணக்கம்! மருந்து நேரம் வந்துவிட்டது' },
+                      { id: 'english', label: 'Indian English 🇮🇳', sample: 'Good morning. Time for your medicine' }
                     ].map((item) => (
                       <button
                         key={item.id}
@@ -245,10 +245,10 @@ export const InteractiveSimulator: React.FC<InteractiveSimulatorProps> = ({ isOp
                     <div className="bg-indigo-950/40 border border-indigo-500/30 rounded-xl p-2.5 text-center">
                       <p className="text-xs font-bold text-indigo-300">
                         {selectedLanguage === 'tanglish' 
-                          ? "“Time aaiduchu, tablet podunga!”" 
+                          ? "“Vanakkam! Time aayiduchu, tablet podunga!”" 
                           : selectedLanguage === 'tamil' 
-                          ? "“மருந்து நேரம் வந்துவிட்டது. உணவுக்குப் பின் எடுக்கவும்!”"
-                          : "“Time for your 8:00 AM dose with food.”"}
+                          ? "“வணக்கம்! மருந்து நேரம் வந்துவிட்டது. உணவுக்குப் பின் எடுக்கவும்!”"
+                          : "“Good morning. Time for your 8:00 AM dose with food.”"}
                       </p>
                       <p className="text-[10px] text-slate-400 mt-1">1 tablet after breakfast with water</p>
                     </div>
